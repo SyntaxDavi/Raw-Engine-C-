@@ -1,0 +1,18 @@
+using Raylib_cs;
+using System.Numerics;
+
+public class MainSceneData
+{
+    public int XSize = 5000;
+    public int YSize = 5000;
+
+    public int getXSize()
+    {
+        return XSize;
+    }   
+
+    public int getYSize()
+    {
+        return YSize;
+    }
+}

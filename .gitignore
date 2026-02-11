@@ -1,0 +1,49 @@
+## [Visual Studio]
+*.swp
+*.*~
+none
+MS-Build-Log.txt
+
+## [Build Results]
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+
+## [User Specific Files]
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.vshost.exe
+*.vshost.exe.config
+*.vshost.exe.manifest
+
+## [Mono]
+*.pidb
+*.mdb
+
+## [OS Related]
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+
+## [Packages]
+*.nupkg
+**/packages/*
+!**/packages/build/
+*.pfx
+*.publishsettings
+
+## [Publish]
+*.pubxml
+*.pubxml.user
+
+## [Visual Studio Code]
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
