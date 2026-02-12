@@ -21,7 +21,7 @@ public class Game
         _tileRegistry = new TileRegistry();
         TileBootstrap.Bootstrap(_tileRegistry);
 
-        _gridWorldManager = new GridWorldManager(250, 250, 64);
+        _gridWorldManager = new GridWorldManager(100, 100, 128);
         _player = new PlayerController(new Vector2(500, 500), _gridWorldManager, _tileRegistry);
         _entities.Add(_player);
         _mainCamera = new MainCamera();

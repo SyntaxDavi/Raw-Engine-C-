@@ -3,7 +3,7 @@ using Raylib_cs;
 
 public class PlayerData
 {
-    public float BaseSpeed = 200f;
+    public float BaseSpeed = 350f;
     public Vector2 Position = new Vector2(500, 500);
     public Vector2 Size = new Vector2(64, 128);
     public int Radius = 25;
