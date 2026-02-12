@@ -1,0 +1,45 @@
+{
+    "activeFile": "MainScene/MainSceneMap.tmj",
+    "expandedProjectPaths": [
+        "MainScene",
+        "."
+    ],
+    "fileStates": {
+        "Base_Tile.tsj": {
+            "scaleInDock": 0.5,
+            "scaleInEditor": 1
+        },
+        "MainScene/Base_Tile.tsj": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "MainScene/MainSceneMap.tmj": {
+            "scale": 0.30429687499999997,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1023.6713735558409,
+                "y": 584.9550706033375
+            }
+        },
+        "MainSceneMap.tmj": {
+            "scale": 0.5,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 1465,
+                "y": 944
+            }
+        }
+    },
+    "last.externalTilesetPath": "D:/Raw Codes/Tiled/MainScene",
+    "openFiles": [
+        "MainScene/MainSceneMap.tmj"
+    ],
+    "project": "Tiled.tiled-project",
+    "recentFiles": [
+        "MainScene/MainSceneMap.tmj",
+        "MainScene/Base_Tile.tsj",
+        "Base_Tile.tsj",
+        "MainSceneMap.tmj"
+    ],
+    "tileset.lastUsedFilter": "Todos os Ficheiros (*)"
+}

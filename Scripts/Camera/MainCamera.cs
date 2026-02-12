@@ -10,7 +10,7 @@
         {
             _camera = new Camera2D();
             _camera.Offset = new Vector2(screenWidth / 2, screenHeight / 2);
-            _camera.Zoom = 0.5f;
+            _camera.Zoom = 1f;
             _camera.Rotation = 0f;
 
             _cameraFollow = new CameraFollow();

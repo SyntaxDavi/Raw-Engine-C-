@@ -9,7 +9,7 @@ public class TileDefinition
     public string Name;            // Nome lógico (debug, editor)
 
     // RENDER
-    public Color Color;            // Visual simples (ou depois Sprite)
+    public Texture2D Texture;            // Visual simples (ou depois Sprite)
 
     // FÍSICA
     public bool BlocksMovement;    // Impede atravessar (parede, pedra)

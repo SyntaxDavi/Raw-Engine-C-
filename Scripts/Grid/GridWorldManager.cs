@@ -42,7 +42,7 @@ public class GridWorldManager
         int x = (int)gridPos.X;
         int y = (int)gridPos.Y;
 
-        if (x < 0 || x >= Width || y < 0 || y >= Height) return 1; // Retorna Wall (1) se estiver fora dos limites
+        if (x < 0 || x >= Width || y < 0 || y >= Height) return 1; // Retorna Parede (1) se estiver fora dos limites do mapa
         return _tiles[x, y];
     }
 }

@@ -16,14 +16,25 @@ public class MapLoader
     public MapData Load(string path)
     {
         string json = File.ReadAllText(path);
-        TiledRawMap raw = JsonSerializer.Deserialize<TiledRawMap>(json);
+        
+        var options = new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        };
+
+        TiledRawMap raw = JsonSerializer.Deserialize<TiledRawMap>(json, options);
+
+        if (raw == null || raw.Layers == null || raw.Layers.Count == 0)
+        {
+            throw new System.Exception("Failed to load map or map has no layers.");
+        }
 
         MapData mapData = new MapData();
         mapData.Width = raw.Width;
         mapData.Height = raw.Height;
         mapData.TileSize = raw.TileWidth;
 
-        mapData.Tiles = ConvertTo2D(raw.Layers[0].Data,raw.Width,raw.Height);
+        mapData.Tiles = ConvertTo2D(raw.Layers[0].Data, raw.Width, raw.Height);
 
         return mapData;
     }

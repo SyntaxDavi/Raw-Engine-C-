@@ -29,9 +29,18 @@ public partial class RendererPipeline
                 int tileId = _gridWorldManager._tiles[x, y];
                 TileDefinition tileDef = _tileRegistry.GetTile(tileId);
                 
-                Color color = tileDef != null ? tileDef.Color : Color.Magenta;
-
-                Raylib.DrawRectangleV(pos, new Vector2(tileSize, tileSize), color);
+                if (tileDef != null)
+                {
+                    Texture2D texture = tileDef.Texture;
+                    Raylib.DrawTexturePro(texture, new Rectangle(0, 0, texture.Width, texture.Height), 
+                    new Rectangle(pos.X, pos.Y, tileSize, tileSize), Vector2.Zero, 0, Color.White);
+                }
+                else 
+                {
+                     // Opcional: Desenhar um quadrado magenta para indicar erro/vazio
+                     Raylib.DrawRectangleV(pos, new Vector2(tileSize, tileSize), Color.Magenta);
+                }
+                
                 Raylib.DrawRectangleLinesEx(new Rectangle(pos.X, pos.Y, tileSize, tileSize), 1, Color.Black);
             }
         }
