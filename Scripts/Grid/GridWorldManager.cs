@@ -31,9 +31,19 @@ public class GridWorldManager
         return new Vector2(x * TileSize, y * TileSize);
     }
 
-    public Vector2 WorldToGrid(int x, int y)
+    public Vector2 WorldToGrid(Vector2 worldPos)
     {
-        return new Vector2(x / TileSize, y / TileSize);
+        return new Vector2((int)worldPos.X / TileSize, (int)worldPos.Y / TileSize);
+    }
+
+    public int GetTileAtWorldPos(Vector2 worldPos)
+    {
+        Vector2 gridPos = WorldToGrid(worldPos);
+        int x = (int)gridPos.X;
+        int y = (int)gridPos.Y;
+
+        if (x < 0 || x >= Width || y < 0 || y >= Height) return 1; // Retorna Wall (1) se estiver fora dos limites
+        return _tiles[x, y];
     }
 
     public void Draw(Camera2D camera)
