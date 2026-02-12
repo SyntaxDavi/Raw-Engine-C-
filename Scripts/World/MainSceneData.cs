@@ -3,8 +3,8 @@ using System.Numerics;
 
 public class MainSceneData
 {
-    public int XSize = 5000;
-    public int YSize = 5000;
+    public int XSize = 2000;
+    public int YSize = 2000;
 
     public int getXSize()
     {
@@ -14,5 +14,5 @@ public class MainSceneData
     public int getYSize()
     {
         return YSize;
-    }
+    } 
 }

@@ -3,26 +3,22 @@
 
     public class MainCamera
     {
-        public const int screenWidth = 1920;
-        public const int screenHeight = 1080;
-        public Camera2D camera = new Camera2D();
-        private Player player;
+        public Camera2D _camera;
+        private CameraFollow _cameraFollow;
 
-        public float zoom = 1.0f;
-        public float rotation = 0.0f;
-        public float Delay = 3.0f;
-        public void Init(Player player)
+        public void Init(PlayerController player, int screenWidth, int screenHeight)
         {
-            this.player = player;
+            _camera = new Camera2D();
+            _camera.Offset = new Vector2(screenWidth / 2, screenHeight / 2);
+            _camera.Zoom = 1f;
+            _camera.Rotation = 0f;
 
-            camera.Target = new Vector2(player.Position.X + 20, player.Position.Y + 20);
-            camera.Offset = new Vector2(screenWidth / 2, screenHeight / 2);
-            camera.Rotation = rotation;
-            camera.Zoom = zoom;
+            _cameraFollow = new CameraFollow();
+            _cameraFollow.Init(player);
         }
 
         public void Update()
         {
-            camera.Target = new Vector2(player.Position.X + 20, player.Position.Y + 20);
+            _cameraFollow.Update(ref _camera);    
         }
     }

@@ -11,6 +11,12 @@ public class InputManager
     const KeyboardKey rightKey = KeyboardKey.D;
     const KeyboardKey exitKey = KeyboardKey.Escape;
     const KeyboardKey interactKey = KeyboardKey.E;
+    public const KeyboardKey fullscreenKey = KeyboardKey.F11;
+ 
+    public static bool IsKeyPressed(KeyboardKey key)
+    {
+        return Raylib.IsKeyPressed(key);
+    }
 
     public Vector2 GetInput()
     {
