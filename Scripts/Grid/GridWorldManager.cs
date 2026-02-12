@@ -38,7 +38,7 @@ public class GridWorldManager
             for(int y = 0; y < Height; y++)
             {
                 Vector2 pos = GridToWorld(x,y);
-                Color color = _tiles[x,y] == 0 ? Color.DarkGreen : Color.Green;
+                Color color = _tiles[x,y] == 0 ? Color.DarkGreen : Color.Red;
 
                 Raylib.DrawRectangleV(pos, new Vector2(TileSize,TileSize),color);
                 Raylib.DrawRectangleLinesEx(new Rectangle(pos.X, pos.Y, TileSize, TileSize), 1, Color.Black);

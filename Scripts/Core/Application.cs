@@ -8,7 +8,7 @@ public class Application
 
     public void Init()
     {
-        Raylib.InitWindow(1280, 720, "Game");
+        Raylib.InitWindow(1920, 1080, "Game");
         Raylib.SetTargetFPS(60);
         UpdateDimensions();
     }

@@ -7,15 +7,18 @@ using System.Reflection;
 // Não deixar ficar muito grande
 public class PlayerController : Entity
 {
-    public float BaseSpeed = 200f;
-    public InputManager inputManager;
+    public PlayerData _playerData;
+    public InputManager _inputManager;
     public CollisionLogic _collisionLogic;
 
+    // Construtor com posição específica
     public PlayerController(Vector2 startPos) : base(startPos, new Vector2(50, 50)) 
     {
         Initialize();
+        Position = startPos; // Garante que a posição da Entity seja a desejada
     }
 
+    // Construtor padrão
     public PlayerController() : base(new Vector2(500, 500), new Vector2(50, 50))
     {
         Initialize();
@@ -23,33 +26,36 @@ public class PlayerController : Entity
 
     private void Initialize()
     {
-        inputManager = new InputManager();
+        _inputManager = new InputManager();
         _collisionLogic = new CollisionLogic();
-        Radius = 25f;
-        BaseSpeed = 200f;
-        IsActive = true;
-        IsVisible = true;
-        IsCollidable = true;
+        _playerData = new PlayerData();
+        
+        // Sincroniza os dados iniciais do PlayerData com a Entity herdada
+        this.Radius = _playerData.Radius;
+        this.Size = _playerData.Size;
+        this.IsActive = _playerData.IsActive;
     }
     
-        public void Input(float dt)
-        {
-         Vector2 direction = inputManager.GetInput();
+    public void Input(float dt)
+    {
+        Vector2 direction = _inputManager.GetInput();
 
-            if(direction != Vector2.Zero)
-                {
-                    Position += direction * BaseSpeed * dt;
-                }
-                _collisionLogic.CheckBounds(ref Position, ref Radius);           
+        if (direction != Vector2.Zero)
+        {
+            Position += direction * _playerData.BaseSpeed * dt;
         }
 
-        public override void Draw()
-        {
-            Raylib.DrawRectangleV(Position, Size, Color.Red);
-            Raylib.DrawText($"Posição X: {Position.X}", 30, 20, 20, Color.White);
-            Raylib.DrawText($"Posição Y: {Position.Y}", 30, 40, 20, Color.White);
-            Raylib.DrawText("Use WASD keys to move the circle", 30, 60, 20, Color.White);
-        }
+        // Passamos a Position e Radius da Entity por referência
+        _collisionLogic.CheckBounds(ref Position, ref Radius);           
+    }
+
+    public override void Draw()
+    {
+        Raylib.DrawRectangleV(Position, Size, Color.Red);
+        Raylib.DrawText($"Posição X: {Position.X}", 30, 20, 20, Color.White);
+        Raylib.DrawText($"Posição Y: {Position.Y}", 30, 40, 20, Color.White);
+        Raylib.DrawText("Use WASD keys to move the circle", 30, 60, 20, Color.White);
+    }
 
         public override void Update(float dt)
         {
