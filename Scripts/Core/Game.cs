@@ -14,6 +14,7 @@ public class Game
     public MainCamera _mainCamera;
     public GridWorldManager _gridWorldManager;
     public TileRegistry _tileRegistry;
+    public RendererPipeline _renderer;
 
     public Game(int screenWidth, int screenHeight)
     {
@@ -25,6 +26,9 @@ public class Game
         _entities.Add(_player);
         _mainCamera = new MainCamera();
         _mainCamera.Init(_player, screenWidth, screenHeight);
+
+        // Inicializamos o renderer UMA VEZ no começo carregando todas as ferramentas
+        _renderer = new RendererPipeline(_tileRegistry, _mainCamera, _gridWorldManager, _entities);
     }
 
     public void Update(float dt)
@@ -39,18 +43,7 @@ public class Game
 
     public void Draw()
     {
-        Raylib.BeginDrawing();
-        Raylib.ClearBackground(Color.Black);
-
-        Raylib.BeginMode2D(_mainCamera._camera);
-
-        _gridWorldManager.Draw(_mainCamera._camera);
-
-        foreach(var entity in _entities)
-        {
-            entity.Draw();
-        }
-        Raylib.EndMode2D();
-        Raylib.EndDrawing();
+        // Agora o Draw apenas pede para o pipeline rodar
+        _renderer.DrawPipeline();
     }
 }

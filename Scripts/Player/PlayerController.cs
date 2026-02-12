@@ -68,16 +68,8 @@ public class PlayerController : Entity
         _collisionLogic.ClampToWorld(ref Position, ref Radius);           
     }
 
-    public override void Draw()
+    public override void Update(float dt)
     {
-        Raylib.DrawRectangleV(Position, Size, Color.Red);
-        Raylib.DrawText($"Posição X: {Position.X}", 30, 20, 20, Color.White);
-        Raylib.DrawText($"Posição Y: {Position.Y}", 30, 40, 20, Color.White);
-        Raylib.DrawText("Use WASD keys to move the circle", 30, 60, 20, Color.White);
+        Input(dt);
     }
-
-        public override void Update(float dt)
-        {
-            Input(dt);
-        }
 }

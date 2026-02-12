@@ -21,7 +21,6 @@ public abstract class Entity
         Size = size;
     }
     public abstract void Update(float dt);
-    public abstract void Draw();
 
     public Rectangle GetBounds()
     {

@@ -12,7 +12,7 @@ public class GridWorldManager
     public int Height;
     public int TileSize;
 
-    private int[,] _tiles;
+    public int[,] _tiles;
 
     public int WorldWidth => Width * TileSize;
     public int WorldHeight => Height * TileSize;
@@ -44,39 +44,5 @@ public class GridWorldManager
 
         if (x < 0 || x >= Width || y < 0 || y >= Height) return 1; // Retorna Wall (1) se estiver fora dos limites
         return _tiles[x, y];
-    }
-
-    public void Draw(Camera2D camera)
-    {
-        // Calcula os limites da visualização da câmera para desenhar apenas o que está na tela
-        Vector2 screenTopLeft = Raylib.GetScreenToWorld2D
-        (new Vector2(0, 0), camera);
-        Vector2 screenBottomRight = Raylib.GetScreenToWorld2D
-        (new Vector2(Raylib.GetScreenWidth(), Raylib.GetScreenHeight()), camera);
-
-        int startX = (int)(screenTopLeft.X / TileSize);
-        int startY = (int)(screenTopLeft.Y / TileSize);
-
-        int endX = (int)(screenBottomRight.X / TileSize) + 2;
-        int endY = (int)(screenBottomRight.Y / TileSize) + 2;
-
-        // Limita os índices aos limites da grid
-        startX = Math.Max(0, startX);
-        startY = Math.Max(0, startY);
-
-        endX = Math.Min(Width, endX);
-        endY = Math.Min(Height, endY);
-
-        for (int x = startX; x < endX; x++)
-        {
-            for (int y = startY; y < endY; y++)
-            {
-                Vector2 pos = GridToWorld(x, y);
-                Color color = _tiles[x, y] == 0 ? Color.DarkGreen : Color.Red;
-
-                Raylib.DrawRectangleV(pos, new Vector2(TileSize, TileSize), color);
-                Raylib.DrawRectangleLinesEx(new Rectangle(pos.X, pos.Y, TileSize, TileSize), 1, Color.Black);
-            }
-        }
     }
 }
