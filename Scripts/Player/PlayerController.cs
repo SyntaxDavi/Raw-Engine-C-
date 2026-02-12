@@ -10,24 +10,26 @@ public class PlayerController : Entity
     public PlayerData _playerData;
     public InputManager _inputManager;
     public CollisionLogic _collisionLogic;
-
+    public GridWorldManager gridWorldManager;
     // Construtor com posição específica
-    public PlayerController(Vector2 startPos) : base(startPos, new Vector2(50, 50)) 
+    public PlayerController(Vector2 startPos, GridWorldManager worldManager) : base(startPos, new Vector2(50, 50)) 
     {
+        gridWorldManager = worldManager;
         Initialize();
         Position = startPos; // Garante que a posição da Entity seja a desejada
     }
 
     // Construtor padrão
-    public PlayerController() : base(new Vector2(500, 500), new Vector2(50, 50))
+    public PlayerController(GridWorldManager worldManager) : base(new Vector2(500, 500), new Vector2(50, 50))
     {
+        gridWorldManager = worldManager;
         Initialize();
     }
 
     private void Initialize()
     {
         _inputManager = new InputManager();
-        _collisionLogic = new CollisionLogic();
+        _collisionLogic = new CollisionLogic(gridWorldManager);
         _playerData = new PlayerData();
         
         // Sincroniza os dados iniciais do PlayerData com a Entity herdada
@@ -46,7 +48,7 @@ public class PlayerController : Entity
         }
 
         // Passamos a Position e Radius da Entity por referência
-        _collisionLogic.CheckBounds(ref Position, ref Radius);           
+        _collisionLogic.ClampToWorld(ref Position, ref Radius);           
     }
 
     public override void Draw()

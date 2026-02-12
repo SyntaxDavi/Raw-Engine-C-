@@ -17,7 +17,7 @@ public class Game
     public Game(int screenWidth, int screenHeight)
     {
         _gridWorldManager = new GridWorldManager(250,250,64);
-        _player = new PlayerController(new Vector2(500, 500));
+        _player = new PlayerController(new Vector2(500, 500), _gridWorldManager);
         _entities.Add(_player);
         _mainCamera = new MainCamera();
         _mainCamera.Init(_player, screenWidth, screenHeight);
@@ -40,7 +40,7 @@ public class Game
 
         Raylib.BeginMode2D(_mainCamera._camera);
 
-        _gridWorldManager.Draw();
+        _gridWorldManager.Draw(_mainCamera._camera);
 
         foreach(var entity in _entities)
         {

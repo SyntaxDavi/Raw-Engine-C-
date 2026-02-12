@@ -6,7 +6,7 @@ public abstract class Entity
     public Vector2 Position;
     public Vector2 Size;
 
-    public float Radius;
+    public int Radius;
     public float Speed;
     public float Rotation;
 
