@@ -51,21 +51,20 @@ public class PlayerController : Entity
             
             // Tenta mover no X
             Vector2 nextPosX = new Vector2(Position.X + moveAmount.X, Position.Y);
-            if (_collisionLogic.IsTileWalkable(nextPosX)) 
+            Vector2 collisionPos = nextPosX + _playerData.CollisionOffset;
+            if (_collisionLogic.IsAreaWalkable(collisionPos, _playerData.CollisionSize)) 
             {
                 Position.X = nextPosX.X;
             }
             
             // Tenta mover no Y
             Vector2 nextPosY = new Vector2(Position.X, Position.Y + moveAmount.Y);
-            if (_collisionLogic.IsTileWalkable(nextPosY)) 
+            collisionPos = nextPosY + _playerData.CollisionOffset;
+            if (_collisionLogic.IsAreaWalkable(collisionPos, _playerData.CollisionSize)) 
             {
                 Position.Y = nextPosY.Y;
             }
-        }
-
-        // Garante que o player não saia das bordas do mapa (SSoT do grid)
-        _collisionLogic.ClampToWorld(ref Position, ref Radius);           
+        }     
     }
 
     public override void Update(float dt)

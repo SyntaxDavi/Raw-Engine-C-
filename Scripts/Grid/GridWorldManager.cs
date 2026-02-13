@@ -33,7 +33,7 @@ public class GridWorldManager
 
     public Vector2 WorldToGrid(Vector2 worldPos)
     {
-        return new Vector2((int)worldPos.X / TileSize, (int)worldPos.Y / TileSize);
+        return new Vector2(MathF.Floor(worldPos.X / TileSize), MathF.Floor(worldPos.Y / TileSize));
     }
 
     public int GetTileAtWorldPos(Vector2 worldPos)
