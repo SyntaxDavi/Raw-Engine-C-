@@ -13,7 +13,7 @@ public class PlayerController : Entity
     public GridWorldManager gridWorldManager;
     public TileRegistry _tileRegistry;
     // Construtor com posição específica
-    public PlayerController(Vector2 startPos, GridWorldManager worldManager, TileRegistry tileRegistry) : base(startPos, new Vector2(50, 50)) 
+    public PlayerController(Vector2 startPos, GridWorldManager worldManager, TileRegistry tileRegistry) : base(startPos, new Vector2(32, 96)) 
     {
         gridWorldManager = worldManager;
         _tileRegistry = tileRegistry;
@@ -22,7 +22,7 @@ public class PlayerController : Entity
     }
 
     // Construtor padrão
-    public PlayerController(GridWorldManager worldManager, TileRegistry tileRegistry) : base(new Vector2(500, 500), new Vector2(50, 50))
+    public PlayerController(GridWorldManager worldManager, TileRegistry tileRegistry) : base(new Vector2(500, 500), new Vector2(32, 96))
     {
         gridWorldManager = worldManager;
         _tileRegistry = tileRegistry;

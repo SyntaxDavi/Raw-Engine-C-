@@ -6,7 +6,7 @@ public class CameraFollow
     private PlayerController _player;
     private GridWorldManager _world;
     private float _baseOffsetX = 5f;
-    private float _baseOffsetY = 25f;
+    private float _baseOffsetY = -25f; 
     private int _screenWidth;
     private int _screenHeight;
     private float _margin = 175f; 

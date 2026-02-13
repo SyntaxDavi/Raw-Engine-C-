@@ -5,6 +5,7 @@ public abstract class Entity
 {
     public Vector2 Position;
     public Vector2 Size;
+    public Vector2 Pivot;
 
     public int Radius;
     public float Speed;
@@ -19,11 +20,12 @@ public abstract class Entity
     {
         Position = StartPos;
         Size = size;
+        Pivot = new Vector2(0.5f,1.0f);
     }
     public abstract void Update(float dt);
 
     public Rectangle GetBounds()
     {
-        return new Rectangle(Position.X, Position.Y,Size.X,Size.Y);
+        return new Rectangle(Position.X - Size.X * Pivot.X, Position.Y - Size.Y * Pivot.Y, Size.X, Size.Y);
     }
 }

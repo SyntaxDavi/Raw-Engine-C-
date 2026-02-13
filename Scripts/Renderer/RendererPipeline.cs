@@ -1,6 +1,7 @@
 using Raylib_cs;
 using System.Numerics;
 using System.Collections.Generic;
+using System.Linq;
 using System;
 
 //Sistema de renderer é quem decide como cada coisa aparece na tela
