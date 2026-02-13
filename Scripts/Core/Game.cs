@@ -30,7 +30,7 @@ public class Game
         _player = new PlayerController(new Vector2(500, 500), _gridWorldManager, _tileRegistry);
         _entities.Add(_player);
         _mainCamera = new MainCamera();
-        _mainCamera.Init(_player, screenWidth, screenHeight);
+        _mainCamera.Init(_player, screenWidth, screenHeight, _gridWorldManager);
 
         // Inicializamos o renderer UMA VEZ no começo carregando todas as ferramentas
         _renderer = new RendererPipeline(_tileRegistry, _mainCamera, _gridWorldManager, _entities);
@@ -43,7 +43,7 @@ public class Game
             entity.Update(dt);
         }
 
-        _mainCamera.Update();
+        _mainCamera.Update(dt);
     }
 
     public void Draw()

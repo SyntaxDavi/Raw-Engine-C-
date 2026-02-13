@@ -6,7 +6,7 @@
         public Camera2D _camera;
         private CameraFollow _cameraFollow;
 
-        public void Init(PlayerController player, int screenWidth, int screenHeight)
+        public void Init(PlayerController player, int screenWidth, int screenHeight, GridWorldManager world)
         {
             _camera = new Camera2D();
             _camera.Offset = new Vector2(screenWidth / 2, screenHeight / 2);
@@ -14,11 +14,11 @@
             _camera.Rotation = 0f;
 
             _cameraFollow = new CameraFollow();
-            _cameraFollow.Init(player);
+            _cameraFollow.Init(player, world, screenWidth, screenHeight);
         }
 
-        public void Update()
+        public void Update(float dt)
         {
-            _cameraFollow.Update(ref _camera);    
+            _cameraFollow.Update(ref _camera, dt);    
         }
     }
