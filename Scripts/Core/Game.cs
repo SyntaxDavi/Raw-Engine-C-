@@ -18,6 +18,7 @@ public class Game
 
     public Game(int screenWidth, int screenHeight)
     {
+        AssetManager.Initialize();
         _tileRegistry = new TileRegistry();
         TileBootstrap.Bootstrap(_tileRegistry);
 

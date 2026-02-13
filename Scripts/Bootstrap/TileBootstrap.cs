@@ -10,7 +10,7 @@ public class TileBootstrap
         {
             Id = 1,
             Name = "Wall",
-            Texture = Raylib.LoadTexture("TileSetsPng/Ase/Spr_wall.png"),
+            Texture = AssetManager.Instance.LoadTexture("spr_wall", "TileSetsPng/Ase/Spr_wall.png"),
             BlocksMovement = true,
             BlocksVision = true,
             IsTrigger = false,
@@ -22,7 +22,7 @@ public class TileBootstrap
         {
             Id = 2,
             Name = "Grass",
-            Texture = Raylib.LoadTexture("TileSetsPng/Ase/Spr_Grass.png"),
+            Texture = AssetManager.Instance.LoadTexture("spr_grass", "TileSetsPng/Ase/Spr_Grass.png"),
             BlocksMovement = false,
             BlocksVision = false,
             IsTrigger = false,
