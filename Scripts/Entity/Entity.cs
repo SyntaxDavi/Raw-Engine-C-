@@ -23,6 +23,7 @@ public abstract class Entity
         Pivot = new Vector2(0.5f,1.0f);
     }
     public abstract void Update(float dt);
+    public abstract void Draw();
 
     public Rectangle GetBounds()
     {

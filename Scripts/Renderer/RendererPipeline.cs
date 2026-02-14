@@ -13,6 +13,7 @@ public partial class RendererPipeline
     public MainCamera _mainCamera;
     public GridWorldManager _gridWorldManager;
     public List<Entity> _entities;
+    public PlayerController _playerController;
 
     //O renderer recebe todas as informações que ele precisa para desenhar
     public RendererPipeline(TileRegistry tileRegistry, MainCamera mainCamera, GridWorldManager gridWorldManager, List<Entity> entities)

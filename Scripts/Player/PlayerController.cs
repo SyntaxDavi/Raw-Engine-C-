@@ -2,6 +2,15 @@ using Raylib_cs;
 using System.Numerics;
 using System.Reflection;
 
+public enum PlayerState
+{
+    Idle,
+    Walking,
+    Running,
+    InDialogue,
+    Interacting,
+    Dead
+}
 // Esse script é responsável por controlar o player
 // Era pra ser apenas o cérebro do player
 // Não deixar ficar muito grande
@@ -12,8 +21,10 @@ public class PlayerController : Entity
     public CollisionLogic _collisionLogic;
     public GridWorldManager gridWorldManager;
     public TileRegistry _tileRegistry;
+    public PlayerAnimator _playerAnimator;
+    public PlayerState _playerState;
     // Construtor com posição específica
-    public PlayerController(Vector2 startPos, GridWorldManager worldManager, TileRegistry tileRegistry) : base(startPos, new Vector2(32, 96)) 
+    public PlayerController(Vector2 startPos, GridWorldManager worldManager, TileRegistry tileRegistry) : base(startPos, new Vector2(128, 128)) 
     {
         gridWorldManager = worldManager;
         _tileRegistry = tileRegistry;
@@ -22,7 +33,7 @@ public class PlayerController : Entity
     }
 
     // Construtor padrão
-    public PlayerController(GridWorldManager worldManager, TileRegistry tileRegistry) : base(new Vector2(500, 500), new Vector2(32, 96))
+    public PlayerController(GridWorldManager worldManager, TileRegistry tileRegistry) : base(new Vector2(500, 500), new Vector2(128, 128))
     {
         gridWorldManager = worldManager;
         _tileRegistry = tileRegistry;
@@ -34,7 +45,9 @@ public class PlayerController : Entity
         _inputManager = new InputManager();
         _collisionLogic = new CollisionLogic(gridWorldManager, _tileRegistry);
         _playerData = new PlayerData();
-        
+        _playerAnimator = new PlayerAnimator();
+        _playerAnimator.Init();
+        _playerState = PlayerState.Idle;
         // Sincroniza os dados iniciais do PlayerData com a Entity herdada
         this.Radius = _playerData.Radius;
         this.Size = _playerData.Size;
@@ -47,6 +60,7 @@ public class PlayerController : Entity
 
         if (direction != Vector2.Zero)
         {
+            _playerState = PlayerState.Walking;
             Vector2 moveAmount = direction * _playerData.BaseSpeed * dt;
             
             // Tenta mover no X
@@ -64,11 +78,19 @@ public class PlayerController : Entity
             {
                 Position.Y = nextPosY.Y;
             }
-        }     
+        } else {
+            _playerState = PlayerState.Idle;
+        }  
     }
 
     public override void Update(float dt)
     {
         Input(dt);
+        _playerAnimator.UpdateState(_playerState, dt);
+    }
+
+    public override void Draw()
+    {
+        _playerAnimator.Draw(Position, Size, Pivot, Rotation);
     }
 }
