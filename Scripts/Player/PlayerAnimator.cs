@@ -4,14 +4,14 @@ using Raylib_cs;
 
 public class PlayerAnimator
 {
-    private SpriteAnimator _animator;
+    private SpriteAnimator _animator = null!;
     private Texture2D _spriteSheet;
 
     public void Init()
     {
         _animator = new SpriteAnimator();
         
-        _spriteSheet = AssetManager.Instance.LoadTexture("player_sheet", "TileSetsPng/Ase/Player_Sheet.png");
+        _spriteSheet = AssetManager.Instance!.LoadTexture("player_sheet", "TileSetsPng/Ase/Player_Sheet.png");
 
         var idleFrames = new List<Rectangle>{
             new Rectangle(0, 0, 64, 64),

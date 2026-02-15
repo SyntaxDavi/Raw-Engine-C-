@@ -8,7 +8,7 @@ public class MapData
     public int Width;
     public int Height;
     public int TileSize;
-    public int [,] Tiles;
+    public int [,] Tiles = null!;
 }
 
 public class MapLoader
@@ -22,7 +22,7 @@ public class MapLoader
             PropertyNameCaseInsensitive = true
         };
 
-        TiledRawMap raw = JsonSerializer.Deserialize<TiledRawMap>(json, options);
+        TiledRawMap raw = JsonSerializer.Deserialize<TiledRawMap>(json, options)!;
 
         if (raw == null || raw.Layers == null || raw.Layers.Count == 0)
         {

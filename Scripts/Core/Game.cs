@@ -15,6 +15,7 @@ public class Game
     public GridWorldManager _gridWorldManager;
     public TileRegistry _tileRegistry;
     public RendererPipeline _renderer;
+    private SaveController _saveController;
 
     public Game(int screenWidth, int screenHeight)
     {
@@ -35,6 +36,23 @@ public class Game
 
         // Inicializamos o renderer UMA VEZ no começo carregando todas as ferramentas
         _renderer = new RendererPipeline(_tileRegistry, _mainCamera, _gridWorldManager, _entities);
+
+        // Inicializa o sistema de save
+        _saveController = new SaveController();
+    }
+
+    public void Save()
+    {
+        _saveController.SaveGame(_player);
+    }
+
+    public void Load()
+    {
+        var data = _saveController.LoadGame();
+        if (data != null)
+        {
+            _player.Position = new Vector2(data.PlayerX, data.PlayerY);
+        }
     }
 
     public void Update(float dt)

@@ -2,27 +2,20 @@ using Raylib_cs;
 using System.Numerics;
 using System.Reflection;
 
-public enum PlayerState
-{
-    Idle,
-    Walking,
-    Running,
-    InDialogue,
-    Interacting,
-    Dead
-}
 // Esse script é responsável por controlar o player
 // Era pra ser apenas o cérebro do player
 // Não deixar ficar muito grande
 public class PlayerController : Entity
 {
-    public PlayerData _playerData;
-    public InputManager _inputManager;
-    public CollisionLogic _collisionLogic;
-    public GridWorldManager gridWorldManager;
-    public TileRegistry _tileRegistry;
-    public PlayerAnimator _playerAnimator;
+    public PlayerData _playerData = null!;
+    public InputManager _inputManager = null!;
+    public CollisionLogic _collisionLogic = null!;
+    public GridWorldManager gridWorldManager = null!;
+    public TileRegistry _tileRegistry = null!;
+    public PlayerAnimator _playerAnimator = null!;
     public PlayerState _playerState;
+    public PlayerMovement _playerMovement = null!;
+
     // Construtor com posição específica
     public PlayerController(Vector2 startPos, GridWorldManager worldManager, TileRegistry tileRegistry) : base(startPos, new Vector2(128, 128)) 
     {
@@ -48,44 +41,49 @@ public class PlayerController : Entity
         _playerAnimator = new PlayerAnimator();
         _playerAnimator.Init();
         _playerState = PlayerState.Idle;
-        // Sincroniza os dados iniciais do PlayerData com a Entity herdada
+        _playerMovement = new PlayerMovement(this, _inputManager, _collisionLogic, _playerData);
+        ApplyData();
+    }
+
+    private void ApplyData()
+    {
         this.Radius = _playerData.Radius;
         this.Size = _playerData.Size;
         this.IsActive = _playerData.IsActive;
     }
+
+    public void PlayerChangeState(PlayerState newState)
+    {
+        if (CanChangeState(newState))
+        {
+            _playerState = newState;
+        }
+    }
+
+    public bool CanChangeState(PlayerState newState)
+    {
+        // Regra 1: Se já for o mesmo estado, não precisa mudar
+        if(_playerState == newState) return false;
+        
+        // Regra 2: Se estiver morto, não pode mudar para quase nada (exemplo de lógica de FSM)
+        if(_playerState == PlayerState.Dead) return false;
+
+        // Regra 3: Se estiver em diálogo, não pode sair correndo
+        if(_playerState == PlayerState.InDialogue && newState == PlayerState.Walking) return false;
+        
+        return true;
+    }
     
     public void Input(float dt)
     {
-        Vector2 direction = _inputManager.GetInput();
-
-        if (direction != Vector2.Zero)
-        {
-            _playerState = PlayerState.Walking;
-            Vector2 moveAmount = direction * _playerData.BaseSpeed * dt;
-            
-            // Tenta mover no X
-            Vector2 nextPosX = new Vector2(Position.X + moveAmount.X, Position.Y);
-            Vector2 collisionPos = nextPosX + _playerData.CollisionOffset;
-            if (_collisionLogic.IsAreaWalkable(collisionPos, _playerData.CollisionSize)) 
-            {
-                Position.X = nextPosX.X;
-            }
-            
-            // Tenta mover no Y
-            Vector2 nextPosY = new Vector2(Position.X, Position.Y + moveAmount.Y);
-            collisionPos = nextPosY + _playerData.CollisionOffset;
-            if (_collisionLogic.IsAreaWalkable(collisionPos, _playerData.CollisionSize)) 
-            {
-                Position.Y = nextPosY.Y;
-            }
-        } else {
-            _playerState = PlayerState.Idle;
-        }  
+        _playerMovement.Input(dt);
     }
 
     public override void Update(float dt)
     {
-        Input(dt);
+        if(_playerState != PlayerState.Dead && _playerState != PlayerState.InDialogue)
+            Input(dt);
+
         _playerAnimator.UpdateState(_playerState, dt);
     }
 

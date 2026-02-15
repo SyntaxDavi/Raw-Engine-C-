@@ -3,8 +3,8 @@ using System.Numerics;
 
 public class CameraFollow
 {
-    private PlayerController _player;
-    private GridWorldManager _world;
+    private PlayerController _player = null!;
+    private GridWorldManager _world = null!;
     private float _baseOffsetX = 5f;
     private float _baseOffsetY = -25f; 
     private int _screenWidth;

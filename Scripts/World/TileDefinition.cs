@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public class TileDefinition
 {
     public int Id;                 // Identificador do tipo
-    public string Name;            // Nome lógico (debug, editor)
+    public string Name = null!;    // Nome lógico (debug, editor)
 
     // RENDER
     public Texture2D Texture;            // Visual simples (ou depois Sprite)

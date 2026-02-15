@@ -7,7 +7,7 @@ using System.Numerics;
 
 public class SceneManager
 {
-    public GridWorldManager CurrentGrid;
+    public GridWorldManager CurrentGrid = null!;
 
     public void LoadScene(string scenePath)
     {

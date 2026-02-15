@@ -4,7 +4,7 @@
     public class MainCamera
     {
         public Camera2D _camera;
-        private CameraFollow _cameraFollow;
+        private CameraFollow _cameraFollow = null!;
 
         public void Init(PlayerController player, int screenWidth, int screenHeight, GridWorldManager world)
         {

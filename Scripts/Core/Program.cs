@@ -12,6 +12,7 @@ public static class Program
         app.Init();
 
         Game game = new Game(app.ScreenWidth, app.ScreenHeight);
+        GameStateController gameStateController = new GameStateController(game);
 
        while(!Raylib.WindowShouldClose())
        {
@@ -22,9 +23,10 @@ public static class Program
                 app.ToggleFullscreen();
             }
 
-            game.Update(dt);
-            game.Draw();
+            gameStateController.Update(dt);
        }
-        Raylib.CloseWindow();
+
+       game.Save();
+       Raylib.CloseWindow();
     }
 }

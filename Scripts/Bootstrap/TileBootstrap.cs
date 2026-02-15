@@ -10,7 +10,7 @@ public class TileBootstrap
         {
             Id = 1,
             Name = "Wall",
-            Texture = AssetManager.Instance.LoadTexture("spr_wall", "TileSetsPng/Ase/Spr_wall.png"),
+            Texture = AssetManager.Instance!.LoadTexture("spr_wall", "TileSetsPng/Ase/Spr_wall.png"),
             BlocksMovement = true,
             BlocksVision = true,
             IsTrigger = false,

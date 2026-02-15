@@ -8,10 +8,10 @@ public class TiledRawMap
     public int Height {get; set;}
     public int TileWidth {get; set;}
     public int TileHeight {get; set;}
-    public List<TiledLayer> Layers {get; set;}
+    public List<TiledLayer> Layers {get; set;} = null!;
 }
 
 public class TiledLayer
 {
-    public int[] Data {get; set;}
+    public int[] Data {get; set;} = null!;
 }
